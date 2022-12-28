@@ -1,0 +1,196 @@
+local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/xHeptc/Kavo-UI-Library/main/source.lua"))()
+local Window = Library.CreateLib("The collector", "Ocean")
+
+game:GetService("StarterGui"):SetCore("SendNotification",{
+    Title="The collector";
+    Text="The collector custome has been injected";
+    Duration=3;
+})
+
+local Tab = Window:NewTab("Movment")
+
+
+local Section = Tab:NewSection("stuff")
+
+Section:NewButton("bypass", "ButtonInfo", function()
+    local lplr = game.Players.LocalPlayer
+            local cam = workspace.CurrentCamera
+            local oldchar
+local clone
+
+oldchar = lplr.Character
+oldchar.Archivable = true
+clone = oldchar:Clone()
+oldchar.PrimaryPart.Anchored = false
+
+local humc = oldchar.Humanoid:Clone()
+humc.Parent = lplr.Character
+game:GetService("RunService").Stepped:connect(function()
+local mag = (clone.PrimaryPart.Position - oldchar.PrimaryPart.Position).Magnitude
+if mag >= 20 then
+oldchar:SetPrimaryPartCFrame(clone.PrimaryPart.CFrame)
+end
+end)
+pcall(function()
+oldchar.PrimaryPart:GetPropertyChangedSignal("CFrame"):connect(function()
+clone:SetPrimaryPartCFrame(oldchar.PrimaryPart.CFrame)
+end)
+end)
+
+cam.CameraSubject = clone.Humanoid 
+clone.Parent = workspace
+lplr.Character = clone
+end)
+
+
+Section:NewButton("my script", "ButtonInfo", function()
+ loadstring(game:HttpGet("https://raw.githubusercontent.com/Ln3242/LiquidBounce/main/Modules/Bedwars.lua"))()
+end)
+
+
+Section:NewButton("keyboard", "ButtonInfo", function()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/advxzivhsjjdhxhsidifvsh/mobkeyboard/main/main.txt", true))()
+end) 
+
+
+
+Section:NewButton("inf jump", "ButtonInfo", function()
+    local InfiniteJumpEnabled = true
+game:GetService("UserInputService").JumpRequest:connect(function()
+	if InfiniteJumpEnabled then
+		game:GetService"Players".LocalPlayer.Character:FindFirstChildOfClass'Humanoid':ChangeState("Jumping")
+	end
+end)
+end)
+
+
+Section:NewButton("infinite yield", "ButtonInfo", function()
+    loadstring(game:HttpGet('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'))()
+end)
+
+
+
+
+
+Section:NewButton("seat disabler", "ButtonInfo", function()
+    for i, v in pairs(game:GetService("Workspace").attack_helicopter:GetDescendants()) do
+       if v.Name == "Driver" then
+           v:Destroy()
+           end
+       if v.Name == "Seat" then
+           v:Destroy() 
+       end
+end
+end)
+
+Section:NewButton("bed break", "ButtonInfo", function()
+    local rootPart = game.Players.LocalPlayer.Character.HumanoidRootPart
+rootPart.CFrame = game:GetService("Workspace").bed.CFrame
+end)
+
+
+
+
+
+Section:NewButton("anti void", "ButtonInfo", function()
+        local antivoidpart = Instance.new("Part", Workspace)
+        antivoidpart.Name = "AntiVoid"
+        antivoidpart.Size = Vector3.new(2100, 0.5, 2000)
+        antivoidpart.Position = Vector3.new(160.5, 25, 247.5)
+        antivoidpart.Transparency = 0.4
+        antivoidpart.Anchored = true
+        antivoidpart.Touched:connect(function(dumbcocks)
+            if dumbcocks.Parent:WaitForChild("Humanoid") and dumbcocks.Parent.Name == lplr.Name then
+                game.Players.LocalPlayer.Character.Humanoid:ChangeState("Jumping")
+                wait(0.2)
+                game.Players.LocalPlayer.Character.Humanoid:ChangeState("Jumping")
+                wait(0.2)
+                game.Players.LocalPlayer.Character.Humanoid:ChangeState("Jumping")
+            end
+        end)
+end)
+
+
+Section:NewButton("Custome-nameTag", "ButtonInfo", function()
+    
+end)
+
+
+Section:NewButton("co-host", "ButtonInfo", function()
+    local v2 = require(game:GetService("ReplicatedStorage")["rbxts_include"]["node_modules"]["@easy-games"]["game-core"].out)
+local OfflinePlayerUtil = v2.OfflinePlayerUtil
+local v6 = OfflinePlayerUtil.getPlayer(game.Players.LocalPlayer);
+v6:SetAttribute("Cohost", true)
+end)
+
+Section:NewToggle("gravity", "ToggleInfo", function(state)
+    if state then
+        game:GetService("Workspace").Gravity = 0
+    else
+        game:GetService("Workspace").Gravity = 192
+    end
+end)
+
+
+Section:NewButton("auto win v2", "ButtonInfo", function()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/CF-Trail/random/main/bedlol2"))()
+end)
+
+
+
+
+Section:NewToggle("Night", "ToggleInfo", function(v)
+    if v then
+        game.Lighting.TimeOfDay = "00:00:00"
+    else
+            game.Lighting.TimeOfDay = "13:00:00"
+    end
+end)
+
+
+Section:NewToggle("killaura", "test", function(state)
+    if state then
+game:GetService("StarterGui"):SetCore("SendNotification",{
+    Title="Aura";
+    Text="Module: Aura has been enabled ";
+    Duration=3;
+})
+        local player = game:GetService("Players")
+local lplr = player.LocalPlayer
+local cam = workspace.CurrentCamera
+local KnitClient = debug.getupvalue(require(lplr.PlayerScripts.TS.knit).setup, 6)
+local SwordCont = KnitClient.Controllers.SwordController
+
+local aura = false
+local DistVal = {["Value"] = 14}
+function Aura()
+    for i,v in pairs(game.Players:GetChildren()) do
+        if v.Character and v.Name ~= game.Players.LocalPlayer.Name and v.Character:FindFirstChild("HumanoidRootPart") then
+            local mag = (v.Character.HumanoidRootPart.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude
+            if mag <= DistVal["Value"] and v.Team ~= game.Players.LocalPlayer.Team and v.Character:FindFirstChild("Humanoid") then
+                if v.Character.Humanoid.Health > 0 then
+                    aura = true
+                    SwordCont:swingSwordAtMouse()
+end
+end
+end
+end
+end
+
+game:GetService("RunService").Stepped:connect(function()
+Aura()
+end)
+    else
+        print("Toggle Off")
+    end
+end)
+
+
+Section:NewKeybind("KeybindText", "KeybindInfo", Enum.KeyCode.F, function()
+	print("You just clicked the bind")
+end)
+
+
+Section:NewKeybind("KeybindText", "KeybindInfo", Enum.KeyCode.F, function()
+	Library:ToggleUI()
+end)
